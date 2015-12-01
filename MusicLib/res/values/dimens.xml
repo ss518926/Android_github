@@ -1,0 +1,50 @@
+<resources>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="list_item_height">52.0dip</dimen>
+    <dimen name="playing_indicator_width">4.0dip</dimen>
+    <dimen name="playing_indicator_height">48.0dip</dimen>
+    <dimen name="kg_audio_item_icon_margin_right">10.0dip</dimen>
+    <dimen name="audio_item_local_icon_height">16.0dip</dimen>
+    <dimen name="kg_audio_item_checkbox_width">25.0dip</dimen>
+    <dimen name="audio_item_local_mark_margin_right">4.0dip</dimen>
+    <dimen name="song_list_primary_text_size">16.0dip</dimen>
+    <dimen name="audio_item_hq_icon_height">13.299988dip</dimen>
+    <dimen name="list_menu_item_height">65.0dip</dimen>
+    <dimen name="common_list_bar_divider_marginright">7.0dip</dimen>
+    <dimen name="playing_bar_height">70.0dip</dimen>
+    <dimen name="playing_bar_child_marginTop">10.0dip</dimen>
+    <dimen name="list_view_height">52.0dip</dimen>
+    <dimen name="playing_bar_album_size">60.0dip</dimen>
+    <dimen name="kg_playingbar_left_move_offset">14.0dip</dimen>
+    <dimen name="kg_playingbar_left_move_padding">5.0dip</dimen>
+    <dimen name="playing_bar_album_padding">2.5dip</dimen>
+    <dimen name="textMediumSize">14.0dip</dimen>
+    <dimen name="playing_bar_btn_width">50.0dip</dimen>
+    <dimen name="playing_bar_btn_height">50.0dip</dimen>
+    <dimen name="playing_bar_primary_text_max_width">105.0dip</dimen>
+    <dimen name="playing_bar_name_paddingTop">5.0dip</dimen>
+    <dimen name="playing_bar_name_paddingBottom">3.0dip</dimen>
+    <dimen name="kg_playingbar_ringht_area_padding_left">10.0dip</dimen>
+    <dimen name="playing_bar_primary_text_size">13.299988dip</dimen>
+    <dimen name="playing_bar_secondary_text_max_width">80.0dip</dimen>
+    <dimen name="playing_bar_secondary_text_size">10.0dip</dimen>
+    <dimen name="playing_bar_icon_size">13.299988dip</dimen>
+    <dimen name="playing_bar_icon_gap">1.0dip</dimen>
+    <dimen name="playing_bar_seeker_thumb_size">30.0dip</dimen>
+    <dimen name="player_seeker_progress_height">1.5dip</dimen>
+    <dimen name="playing_bar_seeker_marginTop">3.0dip</dimen>
+    <dimen name="playing_bar_seeker_progress_height">1.5dip</dimen>
+    <dimen name="kg_playingbar_ringht_seekbar_padding_left">15.0dip</dimen>
+    <dimen name="playing_bar_seeker_thumb_offset">15.0dip</dimen>
+    <dimen name="playing_bar_seekbar_paddingRight">15.0dip</dimen>
+    <dimen name="common_bar_header_bg_height">45.0dip</dimen>
+    <dimen name="lsit_common_bar_right_btn_width">70.0dip</dimen>
+    <dimen name="lsit_common_bar_right_btn_width_2">55.0dip</dimen>
+    <dimen name="bills_detail_slideheader_btn_width">70.0dip</dimen>
+    <dimen name="kg_title_bar_divider_line_margin">10.0dip</dimen>
+    
+    <dimen name="navigation_search_height">45.0dip</dimen>
+
+</resources>
