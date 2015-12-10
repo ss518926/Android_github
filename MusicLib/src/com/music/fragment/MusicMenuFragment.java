@@ -119,10 +119,7 @@ public class MusicMenuFragment extends Fragment {
 				(Application) context.getApplicationContext());
 		playControl.setCursor(cursor);
 
-		if (!playControl.isMediaPlayerPrepared()) {
-			playControl.prepareMediaPlayer(0);
-		}
-		playControl.startPlayback();
+		playControl.skipToTrack(0);
 
 		int titleID = R.string.title_online_music;
 		String tag = context.getString(titleID);
