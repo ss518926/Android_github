@@ -192,6 +192,8 @@ public class AsyncPlayFolderRecursiveTask extends AsyncTask<String, Void, Void> 
 			duration = cursor.getInt(cursor
 					.getColumnIndex(MediaStore.Audio.Media.DURATION));
 		}
+		
+		cursor.close();
 
 		String title = FileUtils.getFilename(filePath);
 		title = FileUtils.getFileNameNoEx(title);

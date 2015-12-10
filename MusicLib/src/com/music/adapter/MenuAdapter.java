@@ -15,9 +15,10 @@ public class MenuAdapter extends BaseAdapter {
 	Context context;
 
 	int[] titleID = { R.string.title_mylist_music, R.string.title_disc_music,
-			R.string.title_online_music };
+			R.string.title_online_music, R.string.title_favorite_music };
 	int[] drawableId = { R.drawable.menu_icon_mylist,
-			R.drawable.menu_icon_disc, R.drawable.menu_icon_online };
+			R.drawable.menu_icon_disc, R.drawable.menu_icon_online,
+			R.drawable.menu_icon_favorite };
 
 	// , R.string.title_favorite_music
 	// , R.drawable.menu_icon_favorite

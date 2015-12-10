@@ -1,5 +1,6 @@
 package com.music.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,6 +59,7 @@ public class AudioPlayFragment extends Fragment {
 	private ListView listView;
 	private AudioAdapter audioAdapter;
 	private List<Song> songList;
+	private List<Song> tempSongList=new ArrayList<Song>();
 	private LinearLayout llPlayMode, llEditMode, llListBar;
 	private ImageView ivPlayMode;
 	private TextView tvPlayMode;
@@ -286,8 +288,10 @@ public class AudioPlayFragment extends Fragment {
 				if (list == null || list.size() == 0) {
 					songPage = -1;
 				}
-				songList.addAll(list);
-				InitPlaylist(songList, owner);
+				tempSongList.clear();
+				tempSongList.addAll(songList);
+				tempSongList.addAll(list);
+				InitPlaylist(tempSongList, owner);
 				isRefresh = false;
 				handler.sendEmptyMessage(TYPE_NEXT_PAGE);
 			}
@@ -303,6 +307,9 @@ public class AudioPlayFragment extends Fragment {
 			switch (msg.what) {
 			case TYPE_NEXT_PAGE:
 				listView.removeFooterView(llWaiting);
+				songList.clear();
+				songList.addAll(tempSongList);
+				tempSongList.clear();
 				audioAdapter.notifyDataSetChanged();
 				break;
 			case UPDATE_SEEKBAR:
