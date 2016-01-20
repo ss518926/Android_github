@@ -275,7 +275,7 @@ public class AudioAdapter extends BaseAdapter {
 		// TODO 歌曲名重名处理
 		song.setFilePath(filePath);
 
-		DownloadUtil mDownloadUtil = new DownloadUtil(3, savePath,
+		DownloadUtil mDownloadUtil = new DownloadUtil(1, savePath,
 				song.getDisplayName() + ".mp3", song.getM4aUrl(), context);
 		mDownloadUtil.start();
 		Toast.makeText(context, "歌曲已添加下载", Toast.LENGTH_SHORT).show();

@@ -59,7 +59,7 @@ public class AudioPlayFragment extends Fragment {
 	private ListView listView;
 	private AudioAdapter audioAdapter;
 	private List<Song> songList;
-	private List<Song> tempSongList=new ArrayList<Song>();
+	private List<Song> tempSongList = new ArrayList<Song>();
 	private LinearLayout llPlayMode, llEditMode, llListBar;
 	private ImageView ivPlayMode;
 	private TextView tvPlayMode;
@@ -284,14 +284,15 @@ public class AudioPlayFragment extends Fragment {
 			@Override
 			public void run() {
 				songPage++;
+				tempSongList.clear();
+				tempSongList.addAll(songList);
 				List<Song> list = SongAPI.Search(searchKey, songPage);
 				if (list == null || list.size() == 0) {
 					songPage = -1;
+				} else {
+					tempSongList.addAll(list);
+					InitPlaylist(tempSongList, owner);
 				}
-				tempSongList.clear();
-				tempSongList.addAll(songList);
-				tempSongList.addAll(list);
-				InitPlaylist(tempSongList, owner);
 				isRefresh = false;
 				handler.sendEmptyMessage(TYPE_NEXT_PAGE);
 			}
@@ -307,9 +308,11 @@ public class AudioPlayFragment extends Fragment {
 			switch (msg.what) {
 			case TYPE_NEXT_PAGE:
 				listView.removeFooterView(llWaiting);
-				songList.clear();
-				songList.addAll(tempSongList);
-				tempSongList.clear();
+				if (songList != null) {
+					songList.clear();
+					songList.addAll(tempSongList);
+					tempSongList.clear();
+				}
 				audioAdapter.notifyDataSetChanged();
 				break;
 			case UPDATE_SEEKBAR:

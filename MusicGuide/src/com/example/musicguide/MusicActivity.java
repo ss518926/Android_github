@@ -2,6 +2,7 @@ package com.example.musicguide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
@@ -24,7 +25,11 @@ public class MusicActivity extends FragmentActivity implements SwitchFragmentCB 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.music_container, menuFragment).commit();
+			
+			
 		}
+		
+		Snackbar s;
 
 		MusicClient.getInstance().setUser("admin");//设定使用者用于数据存储和使用
 		

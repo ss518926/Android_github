@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -51,10 +52,14 @@ public class DownlaodSqlTool {
      * 更新数据库中的下载信息
      */
     public void updataInfos(int threadId, int compeleteSize, String urlstr) {
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        String sql = "update download_info set compelete_size=? where thread_id=? and url=?";
-        Object[] bindArgs = { compeleteSize, threadId, urlstr };
-        database.execSQL(sql, bindArgs);
+        try {
+			SQLiteDatabase database = dbHelper.getWritableDatabase();
+			String sql = "update download_info set compelete_size=? where thread_id=? and url=?";
+			Object[] bindArgs = { compeleteSize, threadId, urlstr };
+			database.execSQL(sql, bindArgs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
     /**
      * 关闭数据库

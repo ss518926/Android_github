@@ -21,24 +21,24 @@ public class DownloadHttpTool {
 
 	private static final String TAG = DownloadHttpTool.class.getSimpleName();
 
-	private int threadCount;//线程数量
-	private String urlstr;//URL地址
+	private int threadCount;// 线程数量
+	private String urlstr;// URL地址
 	private Context mContext;
 	private Handler mHandler;
-	private List<DownloadInfo> downloadInfos;//保存下载信息的类
+	private List<DownloadInfo> downloadInfos;// 保存下载信息的类
 
-	private String localPath;//目录
-	private String fileName;//文件名
+	private String localPath;// 目录
+	private String fileName;// 文件名
 	private int fileSize;
-	private DownlaodSqlTool sqlTool;//文件信息保存的数据库操作类
+	private DownlaodSqlTool sqlTool;// 文件信息保存的数据库操作类
 
 	private enum Download_State {
-		Downloading, Pause, Ready;//利用枚举表示下载的三种状态
+		Downloading, Pause, Ready;// 利用枚举表示下载的三种状态
 	}
 
-	private Download_State state = Download_State.Ready;//当前下载状态
+	private Download_State state = Download_State.Ready;// 当前下载状态
 
-	private int globalCompelete = 0;//所有线程下载的总数
+	private int globalCompelete = 0;// 所有线程下载的总数
 
 	public DownloadHttpTool(int threadCount, String urlString,
 			String localPath, String fileName, Context context, Handler handler) {
@@ -52,7 +52,7 @@ public class DownloadHttpTool {
 		sqlTool = new DownlaodSqlTool(mContext);
 	}
 
-	//在开始下载之前需要调用ready方法进行配置
+	// 在开始下载之前需要调用ready方法进行配置
 	public void ready() {
 		Log.w(TAG, "ready");
 		globalCompelete = 0;
@@ -95,13 +95,13 @@ public class DownloadHttpTool {
 		state = Download_State.Pause;
 		sqlTool.closeDb();
 	}
-	
-	public void delete(){
+
+	public void delete() {
 		compelete();
 		File file = new File(localPath + "/" + fileName);
 		file.delete();
 	}
-	
+
 	public void compelete() {
 		sqlTool.delete(urlstr);
 		sqlTool.closeDb();
@@ -115,7 +115,7 @@ public class DownloadHttpTool {
 		return globalCompelete;
 	}
 
-	//第一次下载初始化
+	// 第一次下载初始化
 	private void initFirst() {
 		Log.w(TAG, "initFirst");
 		try {
@@ -155,7 +155,7 @@ public class DownloadHttpTool {
 		sqlTool.insertInfos(downloadInfos);
 	}
 
-	//自定义下载线程
+	// 自定义下载线程
 	private class DownloadThread extends Thread {
 
 		private int threadId;
@@ -196,14 +196,14 @@ public class DownloadHttpTool {
 				while ((length = is.read(buffer)) != -1) {
 					randomAccessFile.write(buffer, 0, length);
 					compeleteSize += length;
-					Message message = Message.obtain();
-					message.what = threadId;
-					message.obj = urlstr;
-					message.arg1 = length;
-					mHandler.sendMessage(message);
-					sqlTool.updataInfos(threadId, compeleteSize, urlstr);
-					Log.w(TAG, "Threadid::" + threadId + "    compelete::"
-							+ compeleteSize + "    total::" + totalThreadSize);
+					synchronized (this) { // 加锁保证已下载的正确性
+						Message message = Message.obtain();
+						message.what = threadId;
+						message.obj = urlstr;
+						message.arg1 = length;
+						mHandler.sendMessage(message);
+					}
+
 					if (compeleteSize >= totalThreadSize) {
 						break;
 					}
@@ -215,6 +215,9 @@ public class DownloadHttpTool {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
+				sqlTool.updataInfos(threadId, compeleteSize, urlstr);
+				Log.w(TAG, "Threadid::" + threadId + "    compelete::"
+						+ compeleteSize + "    total::" + totalThreadSize);
 				try {
 					if (is != null) {
 						is.close();
